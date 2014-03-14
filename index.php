@@ -1,10 +1,10 @@
-<html>
- <head>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 
-  <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
 
-
- 	<style type="text/css">
+  <title>Form Login</title>
+  <style type="text/css">
   * {
     margin: 0px;
     padding: 0px;outline: none;
@@ -86,70 +86,23 @@
   }
   </style>
 </head>
+
 <body>
-<?php
+  <center><img src="http://i.imgur.com/ZMQC5Sx.png"></center>
+<FORM method="post" action="login.php">
 
-$host="localhost";
-$user="root";
-$password="root";
-$server=mysql_connect($host, $user, $password) or die("Impossibile connettersi al database MySQL");
-$db="sociale";
-mysql_select_db($db, $server) or die("Impossibile connettersi al database MySQL");
+    <label>Username:</label>
+      <input type="text" name="username" />
+    <label>Password:</label>
+      <input type="password" name="password"  />
+      <input type="submit" value="Submit" name="submit" class="submit" />
+</form> 
+<FORM method="post" action="registrazione.php">
 
-if(isset($_POST['username']) && isset($_POST['password']) && isset($_POST['display_name'])) {
-
-	$us = $_POST['username'];
-	$ps = $_POST['password'];
-	$dn = $_POST['display_name'];
-
-  $query = "SELECT * FROM utenti where username = '".$us."'";
-  $dbresult = mysql_query($query);
-
-  $result = mysql_query("SELECT * FROM utenti where username = '".$us."'", $server);
-  if (mysql_fetch_array($dbresult) != NULL) return ;
-
-  $query = "INSERT INTO utenti VALUES(NULL,'$us','$ps','$dn');";
-  $dbresult = mysql_query($query);
-  if (!$dbresult) print "Errore inserimento ".mysql_error();  
-  else print "Registrazione effettuata!!";
-}
-
-?>
-
- <center><img src="http://i.imgur.com/ZMQC5Sx.png"></center>
-<form name="form_registrazione" method="post" action="">
-		<ul>
-		<label> Username: </label>
-		<input id="username" name="username" type="text" value="">
-		<label> Password: </label>
-		<input id="password" name="password" type="password" value="">
-		<label> DisplayName: </label> 
-		<input id="display_name" name="display_name" type="text" value="">
-		</ul>
-		<input id="submit" name="invia" type="submit" value="Invia"> 		
-		</form>
-
-<?php
-mysql_close($server);
-?>
-
-<script>
-
-  $( "#submit" ).click(function() {
-    var username = $('#username').val();
-    var pass = $('#password').val();
-    var display = $('#display_name').val();
-    if (username == '' || username == undefined || pass == '' || pass == undefined || display == '' || display == undefined) {
-      $("#submit").prop('disabled', true);
-    }
-  });
-
-  $("input").change(function() {
-    $("#submit").prop('disabled', false);
-  });
-
-</script>
-
-
+    <label>Non sei ancora registrato?<br>
+           <input type="submit" value="registrati"  class="submit" />
+    </label>
+    
+</form>
 </body>
 </html>
